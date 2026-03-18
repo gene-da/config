@@ -6,12 +6,11 @@ config.window_decorations = "RESIZE"
 config.initial_rows = 40
 config.initial_cols = 140
 
-config.font = wezterm.font("Liga SFMono Nerd Font")
+config.font = wezterm.font("CaskaydiaCove Nerd Font")
 config.font_size = 13.0
 config.line_height = 1.1
 
-config.color_scheme_dirs = { "//wsl$/Ubuntu-24.04/home/edanniii/.config/wezterm/colors" }
-config.color_scheme = "Oxocarbon Dark"
+config.color_scheme = "Ayu Mirage"
 
 config.window_background_opacity = 1.0
 config.window_padding = { left = 0, right = 0, top = 5, bottom = 0 }

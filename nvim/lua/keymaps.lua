@@ -17,6 +17,32 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to right window'
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to upper window' })
 
+vim.keymap.set('n', '<leader>rq', '<CMD>qa!<CR>', { desc = 'Quit: Nuke all current changes' })
+
+vim.keymap.set('n', '<leader>yf', function()
+  local file = vim.fn.expand '%:p'
+  local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+
+  if git_root and git_root ~= '' then
+    file = file:gsub(git_root .. '/', '')
+  end
+
+  vim.fn.setreg('+', file)
+end, { desc = '[Y]ank [F]ile path from git.' })
+
+vim.keymap.set('n', '<leader>yd', function()
+  local file = vim.fn.expand '%:p'
+  local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+
+  local dir = file
+  if git_root and git_root ~= '' then
+    dir = file:gsub(git_root .. '/', '')
+  end
+
+  dir = vim.fn.fnamemodify(dir, ':h')
+  vim.fn.setreg('+', dir)
+end, { desc = '[Y]ank [D]irectory of file from git.' })
+
 vim.keymap.set('n', '<leader>pf', function()
   require('telescope.builtin').find_files {
     cwd = root(),
@@ -53,6 +79,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.hl.on_yank()
   end,
 })
+
 vim.keymap.set('n', '<leader>nh', '<cmd>Noice history<CR>', { desc = 'Message history' })
 vim.keymap.set('n', '<leader>nl', '<cmd>Noice last<CR>', { desc = 'Last message' })
 vim.keymap.set('n', '<leader>nd', '<cmd>Noice dismiss<CR>', { desc = 'Dismiss messages' })

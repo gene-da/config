@@ -53,27 +53,46 @@ return {
       return {
         options = {
           theme = theme,
-          component_separators = '',
-          section_separators = '',
+
+          -- these create the pill shapes
+          --section_separators = { right = '', left = '' },
+
+          -- spacing between components
+          component_separators = { left = ' ', right = ' ' },
+
+          globalstatus = true,
         },
 
         sections = {
           lualine_a = {
             {
               'mode',
-              fmt = function(str)
-                local modes = {
-                  NORMAL = 'N',
-                  INSERT = 'I',
-                  VISUAL = 'V',
-                  VLINE = 'V',
-                  ['V-BLOCK'] = 'VB',
-                  COMMAND = 'C',
-                  REPLACE = 'R',
-                  TERMINAL = 'T',
-                }
-                return modes[str] or str
-              end,
+              padding = { left = 2, right = 2 },
+            },
+          },
+
+          lualine_b = {
+            {
+              'branch',
+              padding = { left = 1, right = 1 },
+            },
+          },
+
+          lualine_c = {
+            {
+              'filename',
+              padding = { left = 1, right = 1 },
+            },
+          },
+
+          lualine_x = { 'encoding', 'filetype' },
+
+          lualine_y = { 'progress' },
+
+          lualine_z = {
+            {
+              'location',
+              padding = { left = 1, right = 2 },
             },
           },
         },

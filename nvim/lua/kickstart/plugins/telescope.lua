@@ -23,37 +23,50 @@ return {
         defaults = {
 
           sorting_strategy = 'ascending',
+
           prompt_prefix = '   ',
           selection_caret = ' ',
+
+          entry_prefix = '  ',
 
           layout_strategy = 'horizontal',
 
           layout_config = {
             horizontal = {
               prompt_position = 'top',
-              preview_width = 0.55,
+              preview_width = 0.60,
+              width = 0.92,
+              height = 0.88,
+            },
+            vertical = {
               width = 0.90,
-              height = 0.85,
+              height = 0.95,
+              preview_height = 0.55,
             },
           },
+
+          path_display = { 'smart' },
 
           winblend = 0,
 
           border = true,
 
-          borderchars = {
-            prompt = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-            results = { '├', '─', '┤', '│', '╯', '─', '╰', '│' },
-            preview = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-          },
-
           file_ignore_patterns = {
             '.git/',
             'node_modules',
             '%.lock',
+            'dist/',
+            'build/',
+          },
+
+          mappings = {
+            i = {
+              ['<C-j>'] = 'move_selection_next',
+              ['<C-k>'] = 'move_selection_previous',
+              ['<C-q>'] = 'send_to_qflist',
+            },
           },
         },
-
         pickers = {
 
           find_files = {

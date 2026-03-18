@@ -1,3 +1,5 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
 format = "$directory $character "
 
 right_format = "$git_branch$git_status$time"
@@ -6,7 +8,7 @@ add_newline = false
 
 [directory]
 truncate_to_repo = true
-truncation_length = 10
+truncation_length = 4
 format = "[$path]($style)"
 style = "bold blue"
 repo_root_style = "bold yellow"
@@ -17,16 +19,17 @@ error_symbol = "[➜](bold red)"
 vimcmd_symbol = "[➜](bold blue)"
 
 [git_branch]
+only_attached = true
 symbol = " "
 format = "[$symbol$branch]($style) "
 style = "bold purple"
 
 [git_status]
-format = "([$all_status$ahead_behind]($style) )"
+format = "([$all_status$ahead_behind]($style)) "
 style = "bold yellow"
 
 [time]
 disabled = false
-format = "[ $time]($style)"
+format = "[   $time ]($style)"
 time_format = "%H:%M"
 style = "bold cyan"
