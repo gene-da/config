@@ -1,12 +1,20 @@
 local wezterm = require("wezterm")
+
 local config = wezterm.config_builder and wezterm.config_builder() or {}
+local target = wezterm.target_triple
 
 config.window_decorations = "RESIZE"
 
 config.initial_rows = 40
 config.initial_cols = 140
 
-config.font = wezterm.font("CaskaydiaCove Nerd Font")
+config.font = wezterm.font_with_fallback({
+	"CaskaydiaCove Nerd Font",
+	"SFMono Nerd Font",
+	"JetBrains Mono",
+	"Monaco",
+})
+
 config.font_size = 13.0
 config.line_height = 1.1
 
@@ -17,7 +25,19 @@ config.window_padding = { left = 0, right = 0, top = 5, bottom = 0 }
 
 config.automatically_reload_config = true
 
-config.default_prog = { "wsl.exe" }
+local is_windows = target:find("windows")
+local is_wsl = os.getenv("WSL_DISTRO_NAME") ~= nil
+local is_mac = target:find("darwin")
+
+if is_windows then
+	config.default_prog = { "wsl.exe" }
+elseif is_wsl then
+	config.default_prog = { "zsh", "-l" }
+elseif is_mac then
+	config.default_prog = { "zsh", "-l" }
+else
+	config.default_prog = { "bash", "-l" }
+end
 
 config.enable_tab_bar = false
 config.enable_scroll_bar = false
