@@ -26,10 +26,3 @@ vim.o.softtabstop = 4
 vim.o.expandtab = true
 vim.o.smartindent = true
 vim.lsp.handlers['textDocument/semanticTokens/full'] = vim.lsp.with(vim.lsp.handlers['textDocument/semanticTokens/full'], {})
-
-vim.api.nvim_set_hl(0, '@keyword', { bold = true })
-vim.api.nvim_set_hl(0, '@comment', { italic = true })
-vim.api.nvim_set_hl(0, '@type', { bold = true })
-vim.api.nvim_set_hl(0, '@parameter', { italic = true })
-vim.api.nvim_set_hl(0, '@variable', { bold = true })
--- vim: ts=2 sts=2 sw=2 et

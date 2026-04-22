@@ -18,8 +18,8 @@ return {
     },
     config = function(_, opts)
       require('snap').setup(opts)
-      vim.keymap.set('v', '<leader>ss', '<cmd>Snap<cr>', { desc = 'Snap selection' })
-      vim.keymap.set('n', '<leader>ss', '<cmd>Snap<cr>', { desc = 'Snap screen' })
+      vim.keymap.set('v', '<leader>ys', '<cmd>Snap<cr>', { desc = 'Yank snap selection' })
+      vim.keymap.set('n', '<leader>ys', '<cmd>Snap<cr>', { desc = 'Yank snap screen' })
     end,
   },
 }

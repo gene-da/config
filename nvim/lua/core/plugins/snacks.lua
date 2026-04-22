@@ -37,12 +37,12 @@ return {
 
       indent = {
         enabled = true,
-        animate = { enabled = ture },
+        animate = { enabled = true },
       },
 
       statuscolumn = { enabled = true },
 
-      words = { enabled = true },
+      words = { enabled = false },
     },
   },
 }

@@ -9,6 +9,7 @@ config.initial_rows = 40
 config.initial_cols = 140
 
 config.font = wezterm.font_with_fallback({
+	"BlexMono Nerd Font",
 	"CaskaydiaCove Nerd Font",
 	"SFMono Nerd Font",
 	"JetBrains Mono",
@@ -18,7 +19,43 @@ config.font = wezterm.font_with_fallback({
 config.font_size = 13.0
 config.line_height = 1.1
 
-config.color_scheme = "Ayu Mirage"
+config.colors = {
+	foreground = "#e0e0e0",
+	background = "#000000",
+
+	cursor_bg = "#e0e0e0",
+	cursor_fg = "#d02670",
+	cursor_border = "#262626",
+
+	selection_bg = "#525252",
+	selection_fg = "#f4f4f4",
+
+	ansi = {
+		"#000000",
+		"#fa4d56",
+		"#08bdba",
+		"#f1c21b",
+		"#4589ff",
+		"#ee5396",
+		"#1192e8",
+		"#ffffff",
+	},
+
+	brights = {
+		"#a8a8a8",
+		"#fa4d56",
+		"#f1c21b",
+		"#ee5396",
+		"#be95ff",
+		"#33b1ff",
+		"#3ddbd9",
+		"#ffd6e8",
+	},
+
+	tab_bar = {
+		background = "#262626",
+	},
+}
 
 config.window_background_opacity = 1.0
 config.window_padding = { left = 0, right = 0, top = 5, bottom = 0 }
@@ -48,7 +85,7 @@ config.disable_default_key_bindings = false
 
 config.keys = {
 	{ key = "l", mods = "CTRL", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
-	{ key = "w", mods = "CTRL", action = wezterm.action.CloseCurrentTab({ confirm = false }) },
+	{ key = "q", mods = "CTRL", action = wezterm.action.CloseCurrentTab({ confirm = false }) },
 	{ key = "\\", mods = "CTRL", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 	{ key = "-", mods = "CTRL", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	{ key = "Enter", mods = "CTRL", action = wezterm.action.ToggleFullScreen },

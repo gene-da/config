@@ -1,5 +1,5 @@
 require('lazy').setup({
-  { import = 'kickstart.plugins' },
+  { import = 'core.plugins' },
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {

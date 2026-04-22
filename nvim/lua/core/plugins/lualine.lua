@@ -2,51 +2,30 @@ return {
   {
     'nvim-lualine/lualine.nvim',
     opts = function()
-      local function hex(n)
-        if not n then
-          return nil
-        end
-        return string.format('#%06x', n)
-      end
-
-      local function hl(name)
-        local h = vim.api.nvim_get_hl(0, { name = name })
-        return {
-          fg = hex(h.fg),
-          bg = hex(h.bg),
-        }
-      end
-
-      local normal = hl 'Normal'
-      local comment = hl 'Comment'
-      local blue = hl 'Function'
-      local green = hl 'String'
-      local magenta = hl 'Statement'
-      local red = hl 'Error'
-      local cyan = hl 'Special'
+      local c = require('theme.palette').palette
 
       local theme = {
         normal = {
-          a = { fg = normal.bg, bg = blue.fg, gui = 'bold' },
-          b = { fg = normal.fg, bg = normal.bg },
-          c = { fg = normal.fg, bg = normal.bg },
+          a = { fg = c.black, bg = c.teal[30], gui = 'bold' },
+          b = { fg = c.white, bg = c.black },
+          c = { fg = c.white, bg = c.black },
         },
         insert = {
-          a = { fg = normal.bg, bg = green.fg, gui = 'bold' },
+          a = { fg = c.black, bg = c.green[30], gui = 'bold' },
         },
         visual = {
-          a = { fg = normal.bg, bg = magenta.fg, gui = 'bold' },
+          a = { fg = c.black, bg = c.magenta[50], gui = 'bold' },
         },
         replace = {
-          a = { fg = normal.bg, bg = red.fg, gui = 'bold' },
+          a = { fg = c.black, bg = c.red[40], gui = 'bold' },
         },
         command = {
-          a = { fg = normal.bg, bg = cyan.fg, gui = 'bold' },
+          a = { fg = c.black, bg = c.cyan[40], gui = 'bold' },
         },
         inactive = {
-          a = { fg = comment.fg, bg = normal.bg },
-          b = { fg = comment.fg, bg = normal.bg },
-          c = { fg = comment.fg, bg = normal.bg },
+          a = { fg = c.black, bg = c.white },
+          b = { fg = c.black, bg = c.white },
+          c = { fg = c.black, bg = c.white },
         },
       }
 
@@ -55,7 +34,7 @@ return {
           theme = theme,
 
           -- these create the pill shapes
-          --section_separators = { right = '', left = '' },
+          -- section_separators = { right = '', left = '' },
 
           -- spacing between components
           component_separators = { left = ' ', right = ' ' },
