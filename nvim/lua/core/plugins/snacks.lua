@@ -13,17 +13,9 @@ return {
           { section = 'header' },
 
           {
-            icon = ' ',
-            title = 'Projects',
-            section = 'projects',
-            indent = 2,
-          },
-
-          {
             icon = ' ',
             title = 'Recent Files',
             section = 'recent_files',
-            indent = 2,
           },
 
           { section = 'startup' },

@@ -2,25 +2,25 @@ return {
   {
     'nvim-lualine/lualine.nvim',
     opts = function()
-      local c = require('theme.palette').palette
+      local c = require('theme.palette').colors.palette
 
       local theme = {
         normal = {
-          a = { fg = c.black, bg = c.teal[30], gui = 'bold' },
+          a = { fg = c.black, bg = c.teal[3], gui = 'bold' },
           b = { fg = c.white, bg = c.black },
           c = { fg = c.white, bg = c.black },
         },
         insert = {
-          a = { fg = c.black, bg = c.green[30], gui = 'bold' },
+          a = { fg = c.black, bg = c.magenta[5], gui = 'bold' },
         },
         visual = {
-          a = { fg = c.black, bg = c.magenta[50], gui = 'bold' },
+          a = { fg = c.black, bg = c.green.base, gui = 'bold' },
         },
         replace = {
-          a = { fg = c.black, bg = c.red[40], gui = 'bold' },
+          a = { fg = c.black, bg = c.red[4], gui = 'bold' },
         },
         command = {
-          a = { fg = c.black, bg = c.cyan[40], gui = 'bold' },
+          a = { fg = c.black, bg = c.cyan[4], gui = 'bold' },
         },
         inactive = {
           a = { fg = c.black, bg = c.white },
@@ -33,7 +33,6 @@ return {
         options = {
           theme = theme,
 
-          -- these create the pill shapes
           -- section_separators = { right = '', left = '' },
 
           -- spacing between components
