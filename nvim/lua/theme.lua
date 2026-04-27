@@ -1,4 +1,4 @@
-local colors = require('theme.palette').colors.palette
+local colors = require('colors.palette').colors.palette
 
 local highlights = {
   common = {
@@ -264,15 +264,15 @@ local highlights = {
 
   telescope = {
     -- TelescopeNormal = {},
-    -- TelescopeBorder = {},
+    TelescopeBorder = { fg = colors.purple[3] },
     -- TelescopePromptNormal = {},
     -- TelescopePromptBorder = {},
-    -- TelescopePromptTitle = {},
-    -- TelescopePreviewTitle = {},
-    -- TelescopeResultsTitle = {},
+    TelescopePromptTitle = { fg = colors.purple[4] },
+    TelescopePreviewTitle = { fg = colors.purple[4] },
+    TelescopeResultsTitle = { fg = colors.purple[4] },
     -- TelescopeSelection = {},
     -- TelescopeSelectionCaret = {},
-    -- TelescopeMatching = {},
+    TelescopeMatching = { fg = colors.teal[3] },
   },
 
   whichkey = {
