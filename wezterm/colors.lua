@@ -1,6 +1,6 @@
 return {
-	foreground = "#e0e0e0",
-	background = "#161616",
+	foreground = "#FFFFFF",
+	background = "#000000",
 
 	cursor_bg = "#e0e0e0",
 	cursor_fg = "#d02670",
@@ -20,7 +20,7 @@ return {
 		"#ffffff",
 	},
 
-	birghts = {
+	brights = {
 		"#a8a8a8",
 		"#fa4d56",
 		"#f1c21b",

@@ -2,7 +2,7 @@ return {
   {
     'nvim-lualine/lualine.nvim',
     opts = function()
-      local c = require('colors.palette').colors.palette
+      local c = require('theme.palette').colors.palette
 
       local theme = {
         normal = {

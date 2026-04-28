@@ -17,10 +17,18 @@ return {
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       { 'j-hui/fidget.nvim', opts = {} },
       'saghen/blink.cmp',
+      {
+        'folke/snacks.nvim',
+        opts = {
+          picker = { enabled = true },
+        },
+      },
     },
 
     config = function()
-      local telescope = require 'telescope.builtin'
+      -- Safe require (prevents crash if Snacks loads late)
+      local ok, snacks = pcall(require, 'snacks')
+      local picker = ok and snacks.picker or nil
 
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
@@ -29,25 +37,31 @@ return {
             mode = mode or 'n'
             vim.keymap.set(mode, keys, func, {
               buffer = event.buf,
-              desc = '' .. desc,
+              desc = desc,
             })
           end
 
-          -- Core IDE motions
-          map('<leader>cd', telescope.lsp_definitions, 'Goto Definition')
-          map('<leader>cD', vim.lsp.buf.declaration, 'Goto Declaration')
-          map('<leader>cr', telescope.lsp_references, 'References')
-          map('<leader>ci', telescope.lsp_implementations, 'Implementation')
-          map('<leader>ct', telescope.lsp_type_definitions, 'Type Definition')
+          if picker then
+            map('<leader>cd', picker.lsp_definitions, 'Goto Definition')
+            map('<leader>cr', picker.lsp_references, 'References')
+            map('<leader>ci', picker.lsp_implementations, 'Implementation')
+            map('<leader>ct', picker.lsp_type_definitions, 'Type Definition')
 
+            map('<leader>cs', picker.lsp_symbols, 'Document Symbols')
+            map('<leader>cS', picker.lsp_workspace_symbols, 'Workspace Symbols')
+          else
+            -- Fallback (so you’re not dead in the water)
+            map('<leader>cd', vim.lsp.buf.definition, 'Goto Definition')
+            map('<leader>cr', vim.lsp.buf.references, 'References')
+            map('<leader>ci', vim.lsp.buf.implementation, 'Implementation')
+            map('<leader>ct', vim.lsp.buf.type_definition, 'Type Definition')
+          end
+
+          map('<leader>cD', vim.lsp.buf.declaration, 'Goto Declaration')
           map('K', vim.lsp.buf.hover, 'Hover Docs')
           map('<leader>crn', vim.lsp.buf.rename, 'Rename')
           map('<leader>ca', vim.lsp.buf.code_action, 'Code Action', { 'n', 'x' })
 
-          map('<leader>cs', telescope.lsp_document_symbols, 'Document Symbols')
-          map('<leader>cS', telescope.lsp_dynamic_workspace_symbols, 'Workspace Symbols')
-
-          -- Highlight references
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
             local group = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
@@ -65,7 +79,6 @@ return {
             })
           end
 
-          -- Inlay hints toggle
           if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
             map('<leader>th', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
@@ -74,7 +87,6 @@ return {
         end,
       })
 
-      -- Diagnostics
       vim.diagnostic.config {
         severity_sort = true,
         float = { border = 'rounded', source = 'if_many' },
@@ -110,6 +122,7 @@ return {
         bashls = {},
         jsonls = {},
         taplo = {},
+        texlab = {},
         lua_ls = {
           settings = {
             Lua = {

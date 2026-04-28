@@ -1,0 +1,74 @@
+\documentclass{article}
+
+\usepackage{xparse}
+\usepackage{pgffor} % for loops
+
+\title{Entity System (LaTeX Edition)}
+\author{Because Why Not}
+\date{}
+
+% ================================
+% "Type Definitions"
+% ================================
+
+% Entity macro (like a struct)
+\NewDocumentCommand{\Entity}{m m m}{
+    % name, energy, type
+    \texttt{<Entity #1 | energy=#2 | type=#3>}
+}
+
+% ================================
+% Data
+% ================================
+
+\def\entitylist{
+    {alpha/93/ALPHA},
+    {beta/78/BETA},
+    {gamma/65/GAMMA}
+}
+
+% ================================
+% "Functions"
+% ================================
+
+% Decay function (pure macro logic)
+\NewDocumentCommand{\Decay}{m m}{
+    % #1 = energy, #2 = rate
+    \pgfmathparse{max(#1 - #2, 0)}
+    \pgfmathresult
+}
+
+% Print all entities
+\newcommand{\PrintEntities}{
+    \foreach \name/\energy/\type in \entitylist {
+        \Entity{\name}{\energy}{\type} \\[4pt]
+    }
+}
+
+% Apply decay (recomputed, not stateful)
+\NewDocumentCommand{\ApplyDecay}{m}{
+    \foreach \name/\energy/\type in \entitylist {
+        \edef\newenergy{\Decay{\energy}{#1}}
+        \Entity{\name}{\newenergy}{\type} \\[4pt]
+    }
+}
+
+% ================================
+% Document
+% ================================
+
+\begin{document}
+
+\maketitle
+
+\section*{Initial State}
+\PrintEntities
+
+\section*{After Decay (rate = 10)}
+\ApplyDecay{10}
+
+\section*{Lookup Example}
+% Fake "lookup" (manual because LaTeX isn't that guy)
+\Entity{beta}{78}{BETA}
+
+\end{document}

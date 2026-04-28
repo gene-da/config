@@ -1,0 +1,41 @@
+{
+  "entities": [
+    {
+      "name": "alpha",
+      "energy": 93
+    },
+    {
+      "name": "beta",
+      "energy": 78
+    }
+  ],
+  "decay": {
+    "rate": 7
+  },
+  "vectors": {
+    "v1": {
+      "x": 1,
+      "y": 2
+    },
+    "v2": {
+      "x": 3,
+      "y": 4
+    },
+    "result": {
+      "x": 4,
+      "y": 6
+    }
+  },
+  "countdown": [
+    5,
+    4,
+    3,
+    2,
+    1
+  ],
+  "config": {
+    "mode": "fast",
+    "retries": 3,
+    "debug": true
+  }
+}
